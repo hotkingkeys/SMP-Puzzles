@@ -1,0 +1,289 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Courier New', Courier, monospace;
+    overflow: hidden;
+    user-select: none;
+    background-color: #000;
+}
+
+/* Environment Layers */
+#sky-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+    z-index: 1;
+    transition: background 0.1s;
+}
+
+#stars-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none; /* Keeps click events focused on the UI elements */
+}
+
+/* Individual Dynamic Stars */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: #fff;
+    border-radius: 50%;
+    opacity: 0; /* Managed entirely by the Time of Day slider */
+    /* Gives the constellation a sweeping kinetic travel effect when triggered */
+    transition: transform 3.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.1s; 
+}
+
+/* Constellation Glow Effect */
+.star.constellation {
+    width: 3px;
+    height: 3px;
+    background-color: #fff;
+    box-shadow: 0 0 8px #fff, 0 0 15px #00ffcc;
+}
+
+@keyframes shake {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    25% { transform: translate(-52%, -48%) rotate(-1deg); }
+    50% { transform: translate(-48%, -52%) rotate(1deg); }
+    75% { transform: translate(-52%, -52%) rotate(-1deg); }
+    100% { transform: translate(-50%, -50%) rotate(0deg); }
+}
+
+.shake-animation {
+    animation: shake 0.3s ease-in-out;
+}
+
+/* Furnace UI Window */
+.puzzle-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    text-align: center;
+}
+
+.furnace-panel {
+    position: relative;
+    width: 440px;  /* Scales the image up perfectly */
+    height: 415px; 
+    box-shadow: 0px 15px 40px rgba(0,0,0,0.8);
+    border-radius: 4px; /* Matches the slight curve of the GUI edges */
+}
+
+#furnace-gui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated; /* Keeps the Minecraft pixels sharp when scaled up */
+    z-index: 1;
+}
+
+.gui-content {
+    position: absolute;
+    bottom: 10px; /* Anchors the content in the empty bottom half of the GUI */
+    left: 0;
+    width: 100%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #3F3F3F; /* Standard dark gray Minecraft GUI text color */
+}
+
+.gui-content h2 {
+    margin: 5px 0;
+    font-size: 20px;
+}
+
+.instructions {
+    color: #555;
+    margin-bottom: 5px;
+    font-size: 14px;
+    line-height: 1.3;
+    font-weight: bold;
+}
+
+#timer-display {
+    font-size: 48px;
+    font-weight: bold;
+    color: #d35400; /* Dark orange to contrast against the light gray */
+    margin: 10px 0 15px 0;
+    font-variant-numeric: tabular-nums;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.6); /* Adds readability */
+}
+
+#smelt-btn {
+    background-color: #d35400;
+    color: #fff;
+    border: 2px solid #a04000;
+    padding: 12px 35px;
+    font-size: 18px;
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: transform 0.1s;
+}
+
+#smelt-btn:active {
+    background-color: #e67e22;
+    transform: scale(0.96);
+}
+
+#status-message {
+    margin-top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+    height: 20px;
+}
+
+/* Slider UI Window */
+.slider-container {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 12px 25px;
+    border-radius: 30px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#time-slider {
+    width: 250px;
+    cursor: pointer;
+}
+
+/* Scenery Layer */
+#scenery-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Prevents the trees from blocking clicks on the slider */
+    z-index: 3; /* Places trees in front of stars (z-index: 2) but behind the UI (z-index: 10) */
+}
+
+.bg-tree {
+    position: absolute;
+    bottom: -13vh; /* Sinks the trunk slightly below the screen edge */
+    image-rendering: pixelated; /* Keeps the Minecraft texture sharp */
+    transition: filter 0.1s; /* Ensures the lighting changes smoothly with the sky */
+}
+
+.tree-left-1 {
+    left: -13%;
+    width: 650px;
+}
+
+.tree-left-2 {
+    left: 5%;
+    width: 450px;
+    bottom: -10vh;
+}
+
+.tree-right {
+    right: -10%;
+    width: 700px; /* Making one larger creates a sense of depth */
+    transform: scaleX(-1); /* Flips the image horizontally */
+}
+
+/* --- Ambient Fireflies --- */
+#firefly-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2; 
+    pointer-events: none;
+    opacity: 0; 
+    transition: opacity 0.2s;
+}
+
+.firefly {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: #cdff5c; 
+    border-radius: 50%;
+    box-shadow: 0 0 8px 2px rgba(205, 255, 92, 0.6);
+    animation: firefly-pulse infinite alternate ease-in-out;
+}
+
+/* We use CSS variables (--tx, --ty) so JS can inject exact coordinates smoothly */
+@keyframes firefly-pulse {
+    0% { transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(0.8); opacity: 0.3; }
+    100% { transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(1.2); opacity: 1; }
+}
+
+/* --- Furnace Embers & Smoke --- */
+#ember-layer {
+    position: absolute;
+    bottom: 50%; /* Starts near the middle/bottom of the furnace */
+    left: 0;
+    width: 100%;
+    height: 10px;
+    z-index: 5; /* Behind the furnace panel (z-index 10) */
+    pointer-events: none;
+}
+
+.ember {
+    position: absolute;
+    bottom: 0;
+    width: 4px;
+    height: 4px;
+    background-color: #ffaa00;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff3300;
+    opacity: 1;
+    /* Smooth upward trajectory */
+    transition: transform 1s cubic-bezier(0.25, 1, 0.5, 1), opacity 1s ease-out, background-color 1s;
+}
+
+.smoke {
+    position: absolute;
+    bottom: 0;
+    width: 15px;
+    height: 15px;
+    background-color: rgba(40, 40, 40, 0.8);
+    border-radius: 50%;
+    filter: blur(4px);
+    opacity: 1;
+    transition: transform 1.5s ease-out, opacity 1.5s ease-out;
+}
+
+
+.crt-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 999; /* Covers absolutely everything */
+    pointer-events: none; /* Lets clicks pass through to the buttons */
+    background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%, 
+        rgba(0, 0, 0, 0.1) 50% /* Very subtle dark lines */
+    );
+    background-size: 100% 4px; /* Creates the horizontal scanline effect */
+}

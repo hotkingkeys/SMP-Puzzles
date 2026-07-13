@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault 01 - The Forge</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sky-layer"></div>
+    <div id="stars-layer"></div>
+
+    <div id="firefly-layer"></div>
+
+    <div id="scenery-layer">
+        <img src="tree.png" class="bg-tree tree-left-2" alt="Oak Tree">
+        <img src="tree.png" class="bg-tree tree-left-1" alt="Oak Tree">
+        <img src="tree.png" class="bg-tree tree-right" alt="Oak Tree">
+    </div>
+
+    <div class="puzzle-container">
+        <div class="furnace-panel">
+            <div id="ember-layer"></div>
+
+            <img id="furnace-gui" src="furnace img1.png" alt="Furnace Interface">
+            
+            <div class="gui-content">
+                <p class="instructions">
+                    Release exactly at 8.00s.<br>
+                    Too early fails, too late burns.
+                </p>
+                
+                <div id="timer-display">0.00s</div>
+                
+                <button id="smelt-btn">HOLD TO HEAT</button>
+                <p id="status-message"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slider-container">
+        <label for="time-slider">Time of Day</label>
+        <input type="range" id="time-slider" min="0" max="100" value="0">
+    </div>
+
+    <div class="crt-overlay"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

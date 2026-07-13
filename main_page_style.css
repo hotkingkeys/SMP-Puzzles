@@ -1,0 +1,158 @@
+/* Reset and Base Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #000;
+    overflow: hidden; /* Hides scrollbars from canvas generation */
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Layer 1: The Canvas Background */
+#matrixCanvas {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; 
+}
+
+/* Layer 2: The Center Logo */
+.logo-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Perfectly centers the div */
+    z-index: 5; 
+}
+
+.center-logo {
+    width: 350px; /* Adjust this to fit your exact image size */
+    filter: drop-shadow(0px 0px 20px rgba(0, 0, 0, 0.9)); /* Adds a dark shadow behind the S */
+    opacity: 0.25;
+}
+
+/* Layer 3: The Quest Menu */
+.quest-menu {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.85); /* Dark semi-transparent background */
+    padding: 10px 15px;
+    z-index: 10;
+}
+
+.quest-link {
+    color: #fff;
+    text-decoration: none;
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    transition: color 0.2s, text-shadow 0.2s;
+}
+
+/* Adds the glowing matrix effect when a player hovers over the link */
+.quest-link:hover {
+    color: #0f0; 
+    text-shadow: 0 0 10px #0f0;
+}
+
+/* ================ Password Prompt ================== */
+
+/* --- Custom Modal Styling --- */
+.hidden {
+    display: none !important;
+}
+
+#password-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Dims the background */
+    z-index: 999; /* Ensures it sits on top of everything */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #050505;
+    border: 1px solid #0f0;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.2);
+    padding: 30px;
+    width: 400px;
+    color: #0f0;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #0f0;
+    padding-bottom: 10px;
+}
+
+.input-line {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    background: #111;
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+.prompt-cursor {
+    color: #aaa;
+    margin-right: 10px;
+}
+
+#vault-input {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    font-family: inherit;
+    flex-grow: 1;
+    text-transform: uppercase; /* Forces typing to look like a code */
+}
+
+.error-text {
+    color: #ff3333;
+    height: 20px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.modal-buttons button {
+    background: transparent;
+    border: 1px solid #0f0;
+    color: #0f0;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: background 0.2s, color 0.2s;
+}
+
+.modal-buttons button:hover {
+    background: #0f0;
+    color: #000;
+}
+
+#btn-cancel {
+    border-color: #555;
+    color: #aaa;
+}
+
+#btn-cancel:hover {
+    background: #555;
+    color: #fff;
+}
