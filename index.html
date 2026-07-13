@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resource Protocol - Hub</title>
+    <link rel="stylesheet" href="main_page_style.css">
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+
+    <div id="password-modal" class="hidden">
+        <div class="modal-content">
+            <h3>> VANGUARD_SYSTEM_LOCKED</h3>
+            <p>Authentication required for Quest 1.</p>
+            
+            <div class="input-line">
+                <span class="prompt-cursor">root@user:~#</span>
+                <input type="text" id="vault-input" autocomplete="off" spellcheck="false">
+            </div>
+            
+            <p id="modal-error" class="error-text"></p>
+            
+            <div class="modal-buttons">
+                <button id="btn-cancel">CANCEL</button>
+                <button id="btn-submit">DECRYPT</button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="quest-menu">
+        <a href="Quest1/quest1.html" id="quest1-link" class="quest-link">&gt; Quest 1</a>
+
+    </nav>
+
+    <div class="logo-container">
+        <img src="image.png" alt="Central Symbol" class="center-logo"> 
+    </div>
+
+    <script src="main_page_script.js"></script>
+</body>
+</html>
