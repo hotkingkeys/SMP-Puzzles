@@ -13,7 +13,7 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         // Redirect back to the hub page. 
         // Note: Change 'index.html' if you named your main hub file something else.
-        window.location.href = '../main_page.html'; 
+        window.location.href = '../index.html'; 
     }
 });
 
